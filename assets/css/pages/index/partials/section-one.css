@@ -1,6 +1,13 @@
-.container {
-    height: 87vh;
+#section-one {
+    height: 100vh;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
@@ -28,16 +35,128 @@
     max-width: 100%;
 }
 
-.button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#start-button {
+    margin-top: 3rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #6766e0;
+    border-radius: 10px;
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
 }
 
-.start-button {
-    font-size: 1rem;
-    color: #5b61d9;
-    border: 1px solid #6766e0;
-    border-radius: 7px;
-    padding: 1rem;
+#start-button::before {
+    content: "";
+    background-color: #d97dc5;
+    width: 0;
+    height: 0; 
+    position: absolute;
+    top: var(--eixoY);
+    left: var(--eixoX);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width .5s, height .5s;
+    z-index: -1;
+}
+
+#start-button:hover::before {
+    width: 500px;
+    height: 500px;
+}
+
+#start-button:hover {
+    transform: scale(1.1, 1.1);
+    transition: 0.5s;
+}
+
+@media (max-width: 1280px) {
+
+    .container {
+        flex-direction: column;
+    }
+
+    .con-left h1, p {
+        text-align: center;
+    }
+
+    .con-left {
+        margin-bottom: 5rem;
+    }
+
+    #start-button {
+        margin-top: 5rem;
+    }
+
+    .img-justify {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .con-right img{
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 1024px){
+    .con-left h1 {
+        font-size: 5rem;
+    }
+
+    .con-left p {
+        font-size: 1.5rem;
+    }
+
+    #start-button {
+        font-size: 1.5rem;
+        padding: 2rem;
+    }
+}
+
+@media (max-height: 800px){
+    .con-left {
+        margin-bottom: 2rem;
+    }
+
+    #start-button {
+        margin-top: 1.2rem;
+    }
+
+    .img-justify {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .con-right img{
+        max-width: 80%;
+    }
+}
+
+@media (max-width: 620px) {
+    #start-button {
+        margin-top: 3.5rem;
+        font-size: 1.5rem;
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 540px){
+    .con-left {
+        margin: 1.5rem;
+    }
+
+    .con-left h1 {
+        font-size: 3rem;
+    }
+
+    .con-left p {
+        font-size: 0.8rem;
+    }
+
+    #start-button {
+        margin-top: 2rem;
+        font-size: 1rem;
+        padding: 1rem;
+    }
 }

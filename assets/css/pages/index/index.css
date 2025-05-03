@@ -1,5 +1,6 @@
 @import url(../../global/global.css);
 @import url(./partials/section-one.css);
+@import url(./partials/section-one-media.css);
 
 body {
     background: #C3DFE2;
