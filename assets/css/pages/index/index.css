@@ -1,0 +1,7 @@
+@import url(../../global/global.css);
+@import url(./partials/section-one.css);
+
+body {
+    background: #C3DFE2;
+    background: radial-gradient(circle, rgba(195, 223, 226, 1) 0%, rgba(253, 252, 251, 1) 100%);
+}
