@@ -1,0 +1,59 @@
+body {
+    background: var(--main-bg-color);
+    background: var(--main-bg-gradient-color);
+}
+
+#choose-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+#choose-section h1 {
+    color: var(--main-h1-color);
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#container-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    gap: 2rem;
+}
+
+.card {
+    background-color: #ffffef;
+    border-radius: 15px;
+    box-shadow: 16px 9px 14px -4px rgba(150, 150, 150, 0.37);
+    width: 25rem;
+    padding: 1.5rem;
+}
+
+.card h2 {
+    color: var(--main-h1-color);
+    text-align: center;
+    margin: 0.5rem 0;
+}
+
+.card p {
+    padding: 0 0.5rem;
+    color: var(--main-p-color);
+    text-align: justify;
+}
+
+.card-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card:hover{
+    cursor: pointer;
+    transform: scale(1.1, 1.1);
+    transition: 0.8s;
+}
