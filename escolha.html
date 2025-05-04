@@ -6,33 +6,38 @@
     <meta name="description" content="Sistema de gerenciamento escolar">
     <meta name="keywords" content="Sistema, Escola, Gestão, Organização, Alunos, Professores, Turmas">
     <title>EasyClass</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/global/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/global/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/global/favicon-16x16.png">
+    <link rel="manifest" href="./assets/images/global/site.webmanifest">
     <link rel="stylesheet" href="./assets/css/pages/escolha/escolha.css">
 </head>
 <body>
     <section id="choose-section">
         <h1>Escolha por onde deseja começar hoje!</h1>
         <div id="container-cards">
-            <div class="card">
+            <article class="card" onclick="cardAluno()">
                 <div class="card-img">
-                    <img src="./assets/images/pages/escolha/student.png" alt="">
+                    <img src="./assets/images/pages/escolha/student.png" alt="Desenho de um estudante branco, loiro com mochila azul e camiseta roxa, representando a gestão de dados acadêmicos e pessoais dos alunos.">
                 </div>
                 <h2>Alunos</h2>
                 <p>Gerencie todos os dados dos alunos em um só lugar, desde de informações pessoais até histórico acadêmico. Adicione, edite ou remova estudantes com facilidade, garantindo sempre a organização da sua escola.</p>
-            </div>
-            <div class="card">
+            </article>
+            <article class="card" onclick="cardTurma()">
                 <div class="card-img">
-                    <img src="./assets/images/pages/escolha/class.png" alt="Duas alunas representando uma turma">
+                    <img src="./assets/images/pages/escolha/class.png" alt="Ilustração de duas estudantes lado a lado, simbolizando a organização e criação de turmas escolares.">
                 </div>
                 <h2>Turmas</h2>
                 <p>Crie e gerencie turmas de forma intuitiva: defina horários, adicione alunos e vincule professores sem complicação. Tenha uma visão clara de cada classe para melhorar o planejamento pedagógico.</p>
-            </div>
-            <div class="card">
+            </article>
+            <article class="card" onclick="cardProfessor()">
                 <div class="card-img">
-                    <img src="./assets/images/pages/escolha/teacher.png" alt="Professora">
+                    <img src="./assets/images/pages/escolha/teacher.png" alt="Desenho de uma professora de cabelo grisalho com óculos e suéter roxo, representando a área de gerenciamento de docentes.">
                 </div>
                 <h2>Professores</h2>
                 <p>Cadastre professores, atribua disciplinas e monitore suas turmas com praticidade. Mantenha os dados atualizados e facilite a comunicação entre coordenação e educadores.</p>
-            </div>
+            </article>
         </div>
     </section>
+    <script src="./assets/js/pages/escolha/card-window-open.js"></script>
 </body>
