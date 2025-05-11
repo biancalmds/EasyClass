@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de gerenciamento escolar">
+    <meta name="keywords" content="Sistema, Escola, Gestão, Organização, Alunos, Professores, Turmas">
+    <title>EasyClass - Turmas</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/global/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/global/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/global/favicon-16x16.png">
+    <link rel="stylesheet" href="./assets/css/pages/index/index.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href=""><img src="" alt=""></a>
+        </nav>
+    </header>
+    <section id="main-page">
+        <h1>Todas as turmas em um só lugar!</h1>
+        <button id="btn-cadastrar">Cadastrar turma</button>
+        <button id="btn-listar">Listar turmas</button>
+    </section>
+    <section id="cadastra-turma">
+        <dialog id="modal-cadastro">
+            <form id="form-cadastra-turma">
+                <label for="materia">Matéria:</label><br>
+                <input type="text" name="materia" id="materia" required><br>
+                <label for="descricao">Descrição:</label><br>
+                <input type="text" name="descricao" id="descricao"><br>
+                <label for="professor_id">Id do Professor:</label>
+                <input type="number" name="professor_id" id="professor_id" required><br>
+                <label for="status">Status:</label><br>
+                <select name="status" id="status">
+                    <option value="" selected disabled>Qual status da turma?</option>
+                    <option value="1">ativa</option>
+                    <option value="0">inativa</option>
+                </select><br>
+                <input type="submit" value="Cadastrar">
+                <button id="fechar-cadastro" class="btn-fechar">Fechar</button>
+            </form>
+        </dialog>
+    </section>
+    <section id="atualiza-turma">
+        <dialog id="modal-atualizacao">
+            <form id="form-atualiza-turma">
+                <input type="hidden" name="id-turma" id="id-turma">
+                <label for="update-materia">Matéria:</label><br>
+                <input type="text" name="update-materia" id="update-materia"><br>
+                <label for="update-descricao">Descrição:</label><br>
+                <input type="text" name="update-descricao" id="update-descricao"><br>
+                <label for="update-professor_id">Id da Turma:</label><br>
+                <input type="number" name="update-professor_id" id="update-professor_id"><br>
+                <label for="update-status">Status:</label><br>
+                <select name="update-status" id="update-status">
+                    <option value="1">ativa</option>
+                    <option value="0">inativa</option>
+                </select><br>
+                <input type="submit" value="Atualizar">
+                <button id="fechar-atualizacao" class="btn-fechar">Fechar</button>
+            </form>
+        </dialog>
+    </section>
+     <section id="turmas-container">
+        <table id="tabela-turmas">
+        </table>
+    </section>
+    <script src="./assets/js/pages/turmas/turmas.js"></script>
+</body>

@@ -9,7 +9,7 @@ document.getElementById("fechar-cadastro").addEventListener("click", () => {
   modalCadastro.close();
 });
 
-// SEÇÃO DE CADASTRO
+// SEÇÃO CADASTRAR
 const formCadastro = document.getElementById("form-cadastra-professor");
 formCadastro.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -31,7 +31,7 @@ formCadastro.addEventListener("submit", async (e) => {
   });
 });
 
-// SEÇÃO DE LEITURA
+// SEÇÃO LER
 const tabelaProfessor = document.getElementById("tabela-professores");
 document.getElementById("btn-listar").addEventListener("click", async () => {
   tabelaProfessor.innerHTML = ""
@@ -48,7 +48,6 @@ document.getElementById("btn-listar").addEventListener("click", async () => {
   const dados = await resposta.json();
   dados.map((professor) => {
     const trProfessor = document.createElement("tr");
-    const tdProfessor = document.createElement("td");
     trProfessor.innerHTML = `
                 <td>${professor.id}</td>
                 <td>${professor.nome}</td>
@@ -58,7 +57,6 @@ document.getElementById("btn-listar").addEventListener("click", async () => {
                 <td>${professor.turmas}</td>
                 <td><a href="#" onclick = "editarProfessor(${professor.id})">Editar</a></td>
                 <td><a href="#" onclick = "excluirProfessor(${professor.id})">Excluir</a></td>`;
-    trProfessor.appendChild(tdProfessor);
     tabelaProfessor.appendChild(trProfessor);
   });
 });
@@ -71,7 +69,7 @@ async function editarProfessor(id) {
   const resposta = await fetch(`${url}/${id}`);
   const dados = await resposta.json();
 
-  formAtualizacao["id-professor"].value = dados.id
+  formAtualizacao["id-professor"].value = dados.id;
   formAtualizacao["update-nome"].value = dados.nome;
   formAtualizacao["update-idade"].value = dados.idade;
   formAtualizacao["update-materia"].value = dados.materia;
