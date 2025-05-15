@@ -27,6 +27,8 @@ class Aluno(db.Model):
   
   def calcular_idade(self):
     today = date.today()
+    print(self.data_nascimento)
+    print("aaaaaaaaaaaaaaa")
     return today.year - self.data_nascimento.year - ((today.month, today.day) < (self.data_nascimento.month, self.data_nascimento.day))
 
   def calcular_nota_final(self):
@@ -53,14 +55,14 @@ def listar_alunos():
 def adicionar_aluno(novos_dados):
         turma = Turma.query.get(novos_dados['turma_id'])
         if(turma is None):
-            return {"message": "Turma não existe"}, 404
-        
+            turma_none = 0
+
         novo_aluno = Aluno(
             nome=novos_dados['nome'],
             data_nascimento=datetime.strptime(novos_dados['data_nascimento'], "%Y-%m-%d").date(),
             nota_primeiro_semestre=float(novos_dados['nota_primeiro_semestre']),
             nota_segundo_semestre=float(novos_dados['nota_segundo_semestre']),
-            turma_id=int(novos_dados['turma_id']),
+            turma_id = novos_dados['turma_id'] if turma is not None else turma_none,
             media_final=(
                 float(novos_dados['nota_primeiro_semestre']) + float(novos_dados['nota_segundo_semestre'])
             ) / 2,
@@ -78,7 +80,8 @@ def atualizar_aluno(id_aluno, novos_dados):
     raise AlunoNaoEncontrado
 
   aluno.nome = novos_dados['nome']
-  aluno.data_nascimento = novos_dados['data_nascimento']
+  #aluno.data_nascimento = novos_dados['data_nascimento']
+  aluno.data_nascimento=datetime.strptime(novos_dados['data_nascimento'], "%Y-%m-%d").date()
   aluno.nota_primeiro_semestre = novos_dados['nota_primeiro_semestre']
   aluno.nota_segundo_semestre = novos_dados['nota_segundo_semestre']
   aluno.media_final = (aluno.nota_primeiro_semestre + aluno.nota_segundo_semestre) / 2

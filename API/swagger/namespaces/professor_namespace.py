@@ -7,14 +7,16 @@ professores_ns = Namespace("professores", description="Operações relacionadas 
 professor_model = professores_ns.model("Professor", {
     "nome": fields.String(required=True, description="Nome do professor"),
     "materia": fields.String(required=True, description="Materia"),
-    "observacao": fields.String(required=True, description="Observações"),
+    "observacoes ": fields.String(required=True, description="Observações"),
+    "idade ": fields.Integer(required=True, description="Idade"),
 })
 
 professor_output_model = professores_ns.model("ProfessorOutput", {
     "id": fields.Integer(description="ID do professor"),
     "nome": fields.String(description="Nome do professor"),
     "materia": fields.String(required=True, description="Materia"),
-    "observacao": fields.String(required=True, description="Observações"),
+    "observacoes": fields.String(required=True, description="Observações"),
+    "idade": fields.Integer(required=True, description="Idade"),
 })
 
 @professores_ns.route("/")

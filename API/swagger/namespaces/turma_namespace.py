@@ -3,15 +3,6 @@ from turma.turma_model import listar_turmas, adicionar_turma, turma_por_id, atua
 
 turmas_ns = Namespace("turmas", description="Operações relacionadas às turmas")
 
-
-    # id = db.Column(db.Integer, primary_key=True)
-    # materia = db.Column(db.String(100), nullable=False)
-    # descricao = db.Column(db.String(100))
-    # ativo = db.Column(db.Boolean(), nullable=False)
-
-    # alunos = db.relationship("Aluno", back_populates="turma", lazy=True)
-    # professor_id = db.Column(db.Integer, db.ForeignKey("professor.id"), nullable=False)
-
 turma_model = turmas_ns.model("Turma", {
     "nome": fields.String(required=True, description="Nome da turma"),
     "materia": fields.String(required=True, description="Materia"),

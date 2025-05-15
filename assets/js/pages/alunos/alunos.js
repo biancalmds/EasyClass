@@ -49,6 +49,8 @@ formCadastro.addEventListener("submit", async (e) => {
 // SEÇÃO LER
 const tabelaAluno = document.getElementById("tabela-alunos");
 document.getElementById("btn-listar").addEventListener("click", async () => {
+  const img = document.getElementById("image")
+  img.style.display = 'none'
   tabelaAluno.innerHTML = "";
   tabelaAluno.innerHTML = `
           <thead>

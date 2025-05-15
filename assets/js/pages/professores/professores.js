@@ -34,6 +34,8 @@ formCadastro.addEventListener("submit", async (e) => {
 // SEÇÃO LER
 const tabelaProfessor = document.getElementById("tabela-professores");
 document.getElementById("btn-listar").addEventListener("click", async () => {
+  const img = document.getElementById("image")
+  img.style.display = 'none'
   tabelaProfessor.innerHTML = "";
   tabelaProfessor.innerHTML = `
           <thead>

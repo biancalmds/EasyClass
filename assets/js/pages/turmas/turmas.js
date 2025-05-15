@@ -51,6 +51,8 @@ formCadastro.addEventListener("submit", async (e) => {
 // SEÇÃO LER
 const tabelaTurma = document.getElementById("tabela-turmas");
 document.getElementById("btn-listar").addEventListener("click", async () => {
+  const img = document.getElementById("image")
+  img.style.display = 'none'
   tabelaTurma.innerHTML = "";
   tabelaTurma.innerHTML = `
           <thead>
