@@ -1,8 +1,0 @@
-body {
-    background: var(--main-bg-color);
-    background: var(--main-bg-gradient-color);
-}
-
-.hidden {
-    display: none;
-}

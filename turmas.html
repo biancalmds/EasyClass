@@ -9,30 +9,42 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/global/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/global/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/global/favicon-16x16.png">
-    <link rel="stylesheet" href="./assets/css/pages/index/index.css">
+    <link rel="stylesheet" href="./assets/css/global/global.css">
+    <link rel="stylesheet" href="./assets/css/global/main-pages.css">
 </head>
 <body>
-    <header>
+   <header>
         <nav>
-            <a href=""><img src="" alt=""></a>
+            <div id="logo">
+                <a href="escolha.html"><img src="./assets/images/global/logo.png" alt="Logo EasyClass"></a>
+            </div>
+           <div id="links">
+                <a href="professores.html">Professores</a>
+                <a href="alunos.html">Alunos</a>
+                <a href="turmas.html">Turmas</a>
+           </div>
         </nav>
     </header>
     <section id="main-page">
         <h1>Todas as turmas em um só lugar!</h1>
-        <button id="btn-cadastrar">Cadastrar turma</button>
-        <button id="btn-listar">Listar turmas</button>
+          <div id="buttons">
+            <button id="btn-cadastrar">Cadastrar turma</button>
+            <button id="btn-listar">Listar turmas</button>
+          </div>
     </section>
     <section id="cadastra-turma">
         <dialog id="modal-cadastro">
-            <form id="form-cadastra-turma">
+            <form id="form-cadastra-turma" class="forms">
                 <label for="materia">Matéria:</label><br>
                 <input type="text" name="materia" id="materia" required><br>
                 <label for="descricao">Descrição:</label><br>
                 <input type="text" name="descricao" id="descricao"><br>
-                <label for="professor_id">Id do Professor:</label>
-                <input type="number" name="professor_id" id="professor_id" required><br>
+                <label for="professor_id">Professor:</label><br>
+                <select class="professor-select" name="professor_id" id="professor_id" required>
+                    <option value="" selected disabled>Escolha um professor</option>
+                </select><br>
                 <label for="status">Status:</label><br>
-                <select name="status" id="status">
+                <select name="status" id="status" required>
                     <option value="" selected disabled>Qual status da turma?</option>
                     <option value="1">ativa</option>
                     <option value="0">inativa</option>
@@ -44,14 +56,14 @@
     </section>
     <section id="atualiza-turma">
         <dialog id="modal-atualizacao">
-            <form id="form-atualiza-turma">
+            <form id="form-atualiza-turma" class="forms">
                 <input type="hidden" name="id-turma" id="id-turma">
                 <label for="update-materia">Matéria:</label><br>
                 <input type="text" name="update-materia" id="update-materia"><br>
                 <label for="update-descricao">Descrição:</label><br>
                 <input type="text" name="update-descricao" id="update-descricao"><br>
-                <label for="update-professor_id">Id da Turma:</label><br>
-                <input type="number" name="update-professor_id" id="update-professor_id"><br>
+                 <label for="professor_id">Professor:</label><br>
+                <select class="professor-select" name="update-professor_id" id="update-professor_id"></select><br>
                 <label for="update-status">Status:</label><br>
                 <select name="update-status" id="update-status">
                     <option value="1">ativa</option>
@@ -62,8 +74,8 @@
             </form>
         </dialog>
     </section>
-     <section id="turmas-container">
-        <table id="tabela-turmas">
+     <section id="turmas-container" class="container-tabelas">
+        <table id="tabela-turmas" class="tabelas">
         </table>
     </section>
     <script src="./assets/js/pages/turmas/turmas.js"></script>

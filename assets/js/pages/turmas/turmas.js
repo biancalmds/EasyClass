@@ -1,4 +1,21 @@
 const url = "http://127.0.0.1:5000/api/turmas";
+const urlProfessor = "http://127.0.0.1:5000/api/professores"
+
+const selects = document.getElementsByClassName("professor-select")
+async function buscarProfessor() {
+  const resposta = await fetch(urlProfessor)
+  const dados = await resposta.json()
+  for(const select of selects){
+    dados.map((professor) => {
+      const option = document.createElement("option")
+      option.innerText = `${professor.id} - ${professor.nome}`
+      option.value = professor.id
+      select.appendChild(option)
+    })
+  }
+}
+
+buscarProfessor()
 
 // ABRIR E FECHAR MODAL DE CADASTRO
 const modalCadastro = document.getElementById("modal-cadastro");
@@ -21,7 +38,7 @@ formCadastro.addEventListener("submit", async (e) => {
         ? "Nenhuma"
         : formCadastro.descricao.value.trim(),
     ativo: parseInt(formCadastro.status.value),
-    professor_id: formCadastro.professor_id.value,
+    professor_id: parseInt(formCadastro.professor_id.value),
   };
 
   const resposta = await fetch(url, {
@@ -36,13 +53,17 @@ const tabelaTurma = document.getElementById("tabela-turmas");
 document.getElementById("btn-listar").addEventListener("click", async () => {
   tabelaTurma.innerHTML = "";
   tabelaTurma.innerHTML = `
+          <thead>
             <tr>
                 <th>Id</th>
                 <th>Matéria</th>
                 <th>Descrição</th>
                 <th>Id do Professor</th>
                 <th>Status</th>
-            </tr>`;
+                <th colspan=2 >Ações</th>
+            </tr>
+          </thead>`;
+  const tbody = document.createElement("tbody");
   const resposta = await fetch(url);
   const dados = await resposta.json();
   dados.map((turma) => {
@@ -59,8 +80,9 @@ document.getElementById("btn-listar").addEventListener("click", async () => {
                 <td><a href="#" onclick = "excluirTurma(${
                   turma.id
                 })">Excluir</a></td>`;
-    tabelaTurma.appendChild(trTurma);
+   tbody.appendChild(trTurma);
   });
+  tabelaTurma.appendChild(tbody)
 });
 
 // SEÇÃO EDITAR

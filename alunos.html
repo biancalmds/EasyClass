@@ -9,34 +9,44 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/global/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/global/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/global/favicon-16x16.png">
-    <link rel="stylesheet" href="./assets/css/pages/index/index.css">
+    <link rel="stylesheet" href="./assets/css/global/global.css">
+    <link rel="stylesheet" href="./assets/css/global/main-pages.css">
 </head>
 <body>
     <header>
         <nav>
-            <a href=""><img src="" alt=""></a>
+            <div id="logo">
+                <a href="escolha.html"><img src="./assets/images/global/logo.png" alt="Logo EasyClass"></a>
+            </div>
+           <div id="links">
+                <a href="professores.html">Professores</a>
+                <a href="alunos.html">Alunos</a>
+                <a href="turmas.html">Turmas</a>
+           </div>
         </nav>
     </header>
     <section id="main-page">
         <h1>Todos os alunos em um só lugar!</h1>
-        <button id="btn-cadastrar">Cadastrar aluno</button>
-        <button id="btn-listar">Listar alunos</button>
+         <div id="buttons">
+            <button id="btn-cadastrar">Cadastrar aluno</button>
+            <button id="btn-listar">Listar alunos</button>
+         </div>
     </section>
     <section id="cadastra-aluno">
         <dialog id="modal-cadastro">
-            <form id="form-cadastra-aluno">
+            <form id="form-cadastra-aluno" class="forms">
                 <label for="nome">Nome:</label><br>
                 <input type="text" name="nome" id="nome" required><br>
                 <label for="dt_nascimento">Idade:</label><br>
                 <input type="date" name="dt_nascimento" id="dt_nascimento" required><br>
                 <label for="turma_id">Id da Turma:</label>
-                <input type="text" name="turma_id" id="turma_id" required>
+                <select class="turma-select" name="turma_id" id="turma_id" required>
+                    <option value="" selected disabled>Escolha uma turma</option>
+                </select><br>
                 <label for="nota1">Nota do 1° semestre:</label><br>
-                <input type="number" name="nota1" id="nota1" required><br>
+                <input type="number" name="nota1" id="nota1" max="10" min="0" required><br>
                 <label for="nota2">Nota do 2° semestre:</label><br>
-                <input type="number" name="nota2" id="nota2" required><br>
-                <label for="media">Média final:</label><br>
-                <input type="number" name="media" id="media" required><br>
+                <input type="number" name="nota2" id="nota2" max="10" min="0" required><br>
                 <input type="submit" value="Cadastrar">
                 <button id="fechar-cadastro" class="btn-fechar">Fechar</button>
             </form>
@@ -44,26 +54,25 @@
     </section>
     <section id="atualiza-aluno">
         <dialog id="modal-atualizacao">
-            <form id="form-atualiza-aluno">
+            <form id="form-atualiza-aluno" class="forms">
+                <input type="hidden" id="id-aluno" name="id-aluno">
                 <label for="update-nome">Nome:</label><br>
                 <input type="text" name="update-nome" id="update-nome"><br>
                 <label for="update-dt_nascimento">Idade:</label><br>
                 <input type="date" name="update-dt_nascimento" id="update-dt_nascimento"><br>
-                <label for="update-turma_id">Id da Turma:</label>
-                <input type="text" name="update-turma_id" id="update-turma_id">
+                <label for="update-turma_id">Id da Turma:</label><br>
+                <select class="turma-select" name="update-turma_id" id="update-turma_id"></select><br>
                 <label for="update-nota1">Nota do 1° semestre:</label><br>
-                <input type="number" name="update-nota1" id="update-nota1"><br>
+                <input type="number" name="update-nota1" id="update-nota1" max="10" min="0"><br>
                 <label for="update-nota2">Nota do 2° semestre:</label><br>
-                <input type="number" name="update-nota2" id="update-nota2"><br>
-                <label for="update-media">Média final:</label><br>
-                <input type="number" name="update-media" id="update-media"><br>
+                <input type="number" name="update-nota2" id="update-nota2" max="10" min="0"><br>
                 <input type="submit" value="Atualizar">
                 <button id="fechar-atualizacao" class="btn-fechar">Fechar</button>
             </form>
         </dialog>
     </section>
-    <section id="alunos-container">
-        <table id="tabela-alunos">
+    <section id="alunos-container" class="container-tabelas">
+        <table id="tabela-alunos" class="tabelas">
         </table>
     </section>
     <script src="./assets/js/pages/alunos/alunos.js"></script>

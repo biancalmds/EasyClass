@@ -34,8 +34,9 @@ formCadastro.addEventListener("submit", async (e) => {
 // SEÇÃO LER
 const tabelaProfessor = document.getElementById("tabela-professores");
 document.getElementById("btn-listar").addEventListener("click", async () => {
-  tabelaProfessor.innerHTML = ""
+  tabelaProfessor.innerHTML = "";
   tabelaProfessor.innerHTML = `
+          <thead>
             <tr>
                 <th>Id</th>
                 <th>Nome</th>
@@ -43,7 +44,10 @@ document.getElementById("btn-listar").addEventListener("click", async () => {
                 <th>Matéria</th>
                 <th>Observações</th>
                 <th>Turmas</th>
-            </tr>`
+                <th colspan=2 >Ações</th>
+            </tr>
+          </thead>`;
+  const tbody = document.createElement("tbody");
   const resposta = await fetch(url);
   const dados = await resposta.json();
   dados.map((professor) => {
@@ -54,11 +58,16 @@ document.getElementById("btn-listar").addEventListener("click", async () => {
                 <td>${professor.idade}</td>
                 <td>${professor.materia}</td>
                 <td>${professor.observacoes}</td>
-                <td>${professor.turmas}</td>
-                <td><a href="#" onclick = "editarProfessor(${professor.id})">Editar</a></td>
-                <td><a href="#" onclick = "excluirProfessor(${professor.id})">Excluir</a></td>`;
-    tabelaProfessor.appendChild(trProfessor);
+                <td>${professor.turmas.map((turma) => turma.materia)}</td>
+                <td><a href="#" onclick = "editarProfessor(${
+                  professor.id
+                })">Editar</a></td>
+                <td><a href="#" onclick = "excluirProfessor(${
+                  professor.id
+                })">Excluir</a></td>`;
+    tbody.appendChild(trProfessor);
   });
+  tabelaProfessor.appendChild(tbody);
 });
 
 // SEÇÃO EDITAR
@@ -81,31 +90,33 @@ async function editarProfessor(id) {
     .addEventListener("click", () => {
       modalAtualizacao.close();
     });
-};
+}
 
-document.getElementById("form-atualiza-professor").addEventListener("submit", async (e) => {
-  const idProfessor = document.getElementById("id-professor").value
-  e.preventDefault();
+document
+  .getElementById("form-atualiza-professor")
+  .addEventListener("submit", async (e) => {
+    const idProfessor = document.getElementById("id-professor").value;
+    e.preventDefault();
 
-  const formAtualizacao = e.target;
-  const dadosProfessor = {
-    nome: formAtualizacao["update-nome"].value,
-    idade: parseInt(formAtualizacao["update-idade"].value),
-    materia: formAtualizacao["update-materia"].value,
-    observacoes: formAtualizacao["update-observacoes"].value
-  };
+    const formAtualizacao = e.target;
+    const dadosProfessor = {
+      nome: formAtualizacao["update-nome"].value,
+      idade: parseInt(formAtualizacao["update-idade"].value),
+      materia: formAtualizacao["update-materia"].value,
+      observacoes: formAtualizacao["update-observacoes"].value,
+    };
 
-  const resposta = await fetch(`${url}/${idProfessor}`, {
-    method: "PUT",
-    body: JSON.stringify(dadosProfessor),
-    headers: { "Content-type": "application/json" }
+    const resposta = await fetch(`${url}/${idProfessor}`, {
+      method: "PUT",
+      body: JSON.stringify(dadosProfessor),
+      headers: { "Content-type": "application/json" },
+    });
   });
-
-});
 
 //SEÇÃO EXCLUIR
 async function excluirProfessor(id) {
   const resposta = await fetch(`${url}/${id}`, {
     method: "DELETE",
   });
-};
+  document.getElementById("btn-listar").click();
+}
