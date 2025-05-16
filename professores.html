@@ -41,13 +41,13 @@
                 <label for="nome">Nome:</label><br>
                 <input type="text" name="nome" id="nome" required placeholder="Digite o nome do professor"><br>
                 <label for="idade">Idade:</label><br>
-                <input type="text" name="idade" id="idade" required placeholder="Digite a idade do professor"><br>
+                <input type="number" name="idade" id="idade" required placeholder="Digite a idade do professor" min="20" max="100"><br>
                 <label for="materia">Matéria:</label><br>
                 <input type="text" name="materia" id="materia" required placeholder="Digite a idade do professor"><br>
                 <label for="observacoes">Observação:</label><br>
                 <textarea type="text" name="observacoes" id="observacoes" placeholder="Digite alguma observação caso houver"></textarea><br>
-                <input type="submit" value="Cadastrar">
-                <button id="fechar-cadastro" class="btn-fechar">Fechar</button>
+                <button type="submit" id="cadastrar" class="btn-submit">Cadastrar</button>
+                <button type="button" id="fechar-cadastro" class="btn-fechar">Fechar</button>
             </form>
         </dialog>
     </section>
@@ -63,8 +63,8 @@
                 <input type="text" name="update-materia" id="update-materia"><br>
                 <label for="update-observacoes">Observação:</label><br>
                 <textarea type="text" name="update-observacoes" id="update-observacoes"></textarea><br>
-                <input type="submit" value="Atualizar">
-                <button id="fechar-atualizacao" class="btn-fechar">Fechar</button>
+                <button type="submit" id="atualizar" class="btn-submit">Atualizar</button>
+                <button type="button" id="fechar-atualizacao" class="btn-fechar">Fechar</button>
             </form>
         </dialog>
     </section>

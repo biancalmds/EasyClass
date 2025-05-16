@@ -49,8 +49,8 @@ formCadastro.addEventListener("submit", async (e) => {
 // SEÇÃO LER
 const tabelaAluno = document.getElementById("tabela-alunos");
 document.getElementById("btn-listar").addEventListener("click", async () => {
-  const img = document.getElementById("image")
-  img.style.display = 'none'
+  const img = document.getElementById("image");
+  img.style.display = "none";
   tabelaAluno.innerHTML = "";
   tabelaAluno.innerHTML = `
           <thead>
@@ -80,8 +80,8 @@ document.getElementById("btn-listar").addEventListener("click", async () => {
                 <td>${aluno.nota_primeiro_semestre}</td>
                 <td>${aluno.nota_segundo_semestre}</td>
                 <td>${aluno.media_final}</td>
-                <td><a href="#" onclick = "editarAluno(${aluno.id})">Editar</a></td>
-                <td><a href="#" onclick = "excluirAluno(${aluno.id})">Excluir</a></td>`;
+                <td><button type="button" onclick = "editarAluno(${aluno.id})">Editar</button></td>
+                <td><button type="button" href="#" onclick = "excluirAluno(${aluno.id})">Excluir</button></td>`;
     tbody.appendChild(trAluno);
   });
   tabelaAluno.appendChild(tbody);

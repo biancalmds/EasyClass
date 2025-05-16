@@ -34,8 +34,8 @@ formCadastro.addEventListener("submit", async (e) => {
 // SEÇÃO LER
 const tabelaProfessor = document.getElementById("tabela-professores");
 document.getElementById("btn-listar").addEventListener("click", async () => {
-  const img = document.getElementById("image")
-  img.style.display = 'none'
+  const img = document.getElementById("image");
+  img.style.display = "none";
   tabelaProfessor.innerHTML = "";
   tabelaProfessor.innerHTML = `
           <thead>
@@ -61,12 +61,12 @@ document.getElementById("btn-listar").addEventListener("click", async () => {
                 <td>${professor.materia}</td>
                 <td>${professor.observacoes}</td>
                 <td>${professor.turmas.map((turma) => turma.materia)}</td>
-                <td><a href="#" onclick = "editarProfessor(${
+                <td><button type="button" onclick = "editarProfessor(${
                   professor.id
-                })">Editar</a></td>
-                <td><a href="#" onclick = "excluirProfessor(${
+                })">Editar</button></td>
+                <td><button type="button" onclick="excluirProfessor(event, ${
                   professor.id
-                })">Excluir</a></td>`;
+                })">Excluir</button></td>`;
     tbody.appendChild(trProfessor);
   });
   tabelaProfessor.appendChild(tbody);
@@ -116,9 +116,11 @@ document
   });
 
 //SEÇÃO EXCLUIR
-async function excluirProfessor(id) {
+async function excluirProfessor(event, id) {
+  event.preventDefault();
+  event.stopPropagation();
   const resposta = await fetch(`${url}/${id}`, {
     method: "DELETE",
   });
-  document.getElementById("btn-listar").click();
+  console.log("teste");
 }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Teste Swal + Dialog</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    dialog {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="btn-cadastrar">Abrir Cadastro</button>
+
+  <dialog id="modal-cadastro">
+    <form method="dialog" id="form-cadastra-professor">
+      <label>Nome: <input type="text" name="nome" required></label><br>
+      <label>Idade: <input type="number" name="idade" required></label><br>
+      <label>Matéria: <input type="text" name="materia" required></label><br>
+      <label>Observações: <textarea name="observacoes"></textarea></label><br>
+      <button type="submit">Cadastrar</button>
+      <button type="button" id="fechar-cadastro">Fechar</button>
+    </form>
+  </dialog>
+
+  <script>
+    const modalCadastro = document.getElementById("modal-cadastro");
+    const formCadastro = document.getElementById("form-cadastra-professor");
+
+    document.getElementById("btn-cadastrar").addEventListener("click", () => {
+      modalCadastro.showModal();
+    });
+
+    document.getElementById("fechar-cadastro").addEventListener("click", () => {
+      modalCadastro.close();
+    });
+
+    formCadastro.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      // Fecha o modal e aguarda o final do ciclo de renderização
+      modalCadastro.close();
+      await new Promise(r => setTimeout(r, 100)); // <- ESSA LINHA É CRUCIAL
+
+      // Exibe o alerta e espera o clique do usuário
+      await Swal.fire({
+        title: "Sucesso!",
+        text: "Professor cadastrado com sucesso!",
+        icon: "success",
+        confirmButtonText: "OK",
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      });
+
+      formCadastro.reset();
+    });
+  </script>
+</body>
+</html>

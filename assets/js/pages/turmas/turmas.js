@@ -1,21 +1,21 @@
 const url = "http://127.0.0.1:5000/api/turmas";
-const urlProfessor = "http://127.0.0.1:5000/api/professores"
+const urlProfessor = "http://127.0.0.1:5000/api/professores";
 
-const selects = document.getElementsByClassName("professor-select")
+const selects = document.getElementsByClassName("professor-select");
 async function buscarProfessor() {
-  const resposta = await fetch(urlProfessor)
-  const dados = await resposta.json()
-  for(const select of selects){
+  const resposta = await fetch(urlProfessor);
+  const dados = await resposta.json();
+  for (const select of selects) {
     dados.map((professor) => {
-      const option = document.createElement("option")
-      option.innerText = `${professor.id} - ${professor.nome}`
-      option.value = professor.id
-      select.appendChild(option)
-    })
+      const option = document.createElement("option");
+      option.innerText = `${professor.id} - ${professor.nome}`;
+      option.value = professor.id;
+      select.appendChild(option);
+    });
   }
 }
 
-buscarProfessor()
+buscarProfessor();
 
 // ABRIR E FECHAR MODAL DE CADASTRO
 const modalCadastro = document.getElementById("modal-cadastro");
@@ -51,8 +51,8 @@ formCadastro.addEventListener("submit", async (e) => {
 // SEÇÃO LER
 const tabelaTurma = document.getElementById("tabela-turmas");
 document.getElementById("btn-listar").addEventListener("click", async () => {
-  const img = document.getElementById("image")
-  img.style.display = 'none'
+  const img = document.getElementById("image");
+  img.style.display = "none";
   tabelaTurma.innerHTML = "";
   tabelaTurma.innerHTML = `
           <thead>
@@ -76,15 +76,11 @@ document.getElementById("btn-listar").addEventListener("click", async () => {
                 <td>${turma.descricao}</td>
                 <td>${turma.professor_id}</td>
                 <td>${turma.ativo == true ? "Ativa" : "Inativa"}</td>
-                <td><a href="#" onclick = "editarTurma(${
-                  turma.id
-                })">Editar</a></td>
-                <td><a href="#" onclick = "excluirTurma(${
-                  turma.id
-                })">Excluir</a></td>`;
-   tbody.appendChild(trTurma);
+                <td><button type="button" onclick="editarTurma(${turma.id})">Editar</button></td>
+                <td><button type="button" onclick ="excluirTurma(${turma.id})">Excluir</button></td>`;
+    tbody.appendChild(trTurma);
   });
-  tabelaTurma.appendChild(tbody)
+  tabelaTurma.appendChild(tbody);
 });
 
 // SEÇÃO EDITAR
@@ -121,7 +117,7 @@ document
       materia: formAtualizacao["update-materia"].value,
       descricao: formAtualizacao["update-descricao"].value,
       ativo: parseInt(formAtualizacao["update-status"].value),
-      professor_id: formAtualizacao["update-professor_id"].value
+      professor_id: formAtualizacao["update-professor_id"].value,
     };
 
     const resposta = await fetch(`${url}/${idTurma}`, {
@@ -133,6 +129,7 @@ document
 
 // SEÇÃO EXCLUIR
 async function excluirTurma(id) {
+  console.log("passouu")
   const resposta = await fetch(`${url}/${id}`, {
     method: "DELETE",
   });
