@@ -42,7 +42,7 @@
                 <label for="nome">Nome:</label><br>
                 <input type="text" name="nome" id="nome" required><br>
                 <label for="dt_nascimento">Idade:</label><br>
-                <input type="date" name="dt_nascimento" id="dt_nascimento" required><br>
+                <input type="date" name="dt_nascimento" id="dt_nascimento" oninput="verificaIdade()" required><br>
                 <label for="turma_id">Id da Turma:</label>
                 <select class="turma-select" name="turma_id" id="turma_id" required>
                     <option value="" selected disabled>Escolha uma turma</option>
@@ -80,5 +80,6 @@
         </table>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.21.2/dist/sweetalert2.all.min.js"></script>
+    <script src="./assets/js/pages/alunos/verificaIdade.js"></script>
     <script src="./assets/js/pages/alunos/alunos.js"></script>
 </body>
