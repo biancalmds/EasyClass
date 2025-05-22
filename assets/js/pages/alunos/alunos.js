@@ -14,7 +14,6 @@ async function buscarTurmas() {
     });
   }
 }
-
 buscarTurmas();
 
 // ABRIR E FECHAR MODAL DE CADASTRO
@@ -26,33 +25,18 @@ document.getElementById("fechar-cadastro").addEventListener("click", () => {
   modalCadastro.close();
 });
 
-// SEÇÃO CADASTRAR
-const formCadastro = document.getElementById("form-cadastra-aluno");
-formCadastro.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const dadosAluno = {
-    nome: formCadastro.nome.value,
-    data_nascimento: formCadastro.dt_nascimento.value,
-    nota_primeiro_semestre: formCadastro.nota1.value,
-    nota_segundo_semestre: formCadastro.nota2.value,
-    turma_id: parseInt(formCadastro.turma_id.value),
-  };
-
-  const resposta = await fetch(url, {
-    method: "POST",
-    body: JSON.stringify(dadosAluno),
-    headers: { "Content-type": "application/json" },
-  });
-});
-
 // SEÇÃO LER
 const tabelaAluno = document.getElementById("tabela-alunos");
 document.getElementById("btn-listar").addEventListener("click", async () => {
-  const img = document.getElementById("image");
-  img.style.display = "none";
-  tabelaAluno.innerHTML = "";
-  tabelaAluno.innerHTML = `
+  try {
+    const resposta = await fetch(url);
+    const dados = await resposta.json();
+
+    if (dados.length > 0) {
+      const img = document.getElementById("image");
+      img.style.display = "none";
+      tabelaAluno.innerHTML = "";
+      tabelaAluno.innerHTML = `
           <thead>
             <tr>
                 <th>Id</th>
@@ -66,12 +50,10 @@ document.getElementById("btn-listar").addEventListener("click", async () => {
                 <th colspan=2 >Ações</th>
             </tr>
           </thead>`;
-  const tbody = document.createElement("tbody");
-  const resposta = await fetch(url);
-  const dados = await resposta.json();
-  dados.map((aluno) => {
-    const trAluno = document.createElement("tr");
-    trAluno.innerHTML = `
+      const tbody = document.createElement("tbody");
+      dados.map((aluno) => {
+        const trAluno = document.createElement("tr");
+        trAluno.innerHTML = `
                 <td>${aluno.id}</td>
                 <td>${aluno.nome}</td>
                 <td>${aluno.idade}</td>
@@ -82,33 +64,92 @@ document.getElementById("btn-listar").addEventListener("click", async () => {
                 <td>${aluno.media_final}</td>
                 <td><button type="button" onclick = "editarAluno(${aluno.id})">Editar</button></td>
                 <td><button type="button" href="#" onclick = "excluirAluno(${aluno.id})">Excluir</button></td>`;
-    tbody.appendChild(trAluno);
-  });
-  tabelaAluno.appendChild(tbody);
+        tbody.appendChild(trAluno);
+      });
+      tabelaAluno.appendChild(tbody);
+    } else {
+      Swal.fire({
+        title: "Não foi possível listar os alunos",
+        text: "Não existem alunos cadastrados ainda!",
+        icon: "info",
+      });
+    }
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Algo deu errado, tente novamente mais tarde.",
+    });
+  }
+});
+
+// SEÇÃO CADASTRAR
+const formCadastro = document.getElementById("form-cadastra-aluno");
+formCadastro.addEventListener("submit", async (e) => {
+  try {
+    e.preventDefault();
+
+    const dadosAluno = {
+      nome: formCadastro.nome.value,
+      data_nascimento: formCadastro.dt_nascimento.value,
+      nota_primeiro_semestre: formCadastro.nota1.value,
+      nota_segundo_semestre: formCadastro.nota2.value,
+      turma_id: parseInt(formCadastro.turma_id.value),
+    };
+
+    const resposta = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(dadosAluno),
+      headers: { "Content-type": "application/json" },
+    });
+
+    modalCadastro.close();
+    Swal.fire({
+      icon: "success",
+      title: "Sucesso!",
+      text: "Aluno cadastrado com sucesso!",
+    });
+  } catch (error) {
+    modalCadastro.close();
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Algo deu errado, tente novamente mais tarde.",
+    });
+  } finally {
+    document.getElementById("btn-listar").click();
+    formCadastro.reset();
+  }
 });
 
 // SEÇÃO EDITAR
 const modalAtualizacao = document.getElementById("modal-atualizacao");
-
 async function editarAluno(id) {
   const formAtualizacao = document.getElementById("form-atualiza-aluno");
-  const resposta = await fetch(`${url}/${id}`);
-  const dados = await resposta.json();
-  console.log(dados);
+  try {
+    const resposta = await fetch(`${url}/${id}`);
+    const dados = await resposta.json();
 
-  formAtualizacao["id-aluno"].value = dados.aluno.id;
-  formAtualizacao["update-nome"].value = dados.aluno.nome;
-  formAtualizacao["update-dt_nascimento"].value = dados.aluno.data_nascimento;
-  formAtualizacao["update-turma_id"].value = dados.aluno.turma_id;
-  formAtualizacao["update-nota1"].value = dados.aluno.nota_primeiro_semestre;
-  formAtualizacao["update-nota2"].value = dados.aluno.nota_segundo_semestre;
+    formAtualizacao["id-aluno"].value = dados.aluno.id;
+    formAtualizacao["update-nome"].value = dados.aluno.nome;
+    formAtualizacao["update-dt_nascimento"].value = dados.aluno.data_nascimento;
+    formAtualizacao["update-turma_id"].value = dados.aluno.turma_id;
+    formAtualizacao["update-nota1"].value = dados.aluno.nota_primeiro_semestre;
+    formAtualizacao["update-nota2"].value = dados.aluno.nota_segundo_semestre;
 
-  modalAtualizacao.showModal();
-  document
-    .getElementById("fechar-atualizacao")
-    .addEventListener("click", () => {
-      modalAtualizacao.close();
+    modalAtualizacao.showModal();
+    document
+      .getElementById("fechar-atualizacao")
+      .addEventListener("click", () => {
+        modalAtualizacao.close();
+      });
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Algo deu errado, tente novamente mais tarde.",
     });
+  }
 }
 
 document
@@ -117,27 +158,68 @@ document
     const idAluno = document.getElementById("id-aluno").value;
     e.preventDefault();
 
-    const formAtualizacao = e.target;
-    const dadosAluno = {
-      nome: formAtualizacao["update-nome"].value,
-      data_nascimento: formAtualizacao["update-dt_nascimento"].value,
-      nota_primeiro_semestre: parseInt(formAtualizacao["update-nota1"].value),
-      nota_segundo_semestre: parseInt(formAtualizacao["update-nota2"].value),
-      turma_id: formAtualizacao["update-turma_id"].value,
-    };
+    try {
+      const formAtualizacao = e.target;
+      const dadosAluno = {
+        nome: formAtualizacao["update-nome"].value,
+        data_nascimento: formAtualizacao["update-dt_nascimento"].value,
+        nota_primeiro_semestre: parseInt(formAtualizacao["update-nota1"].value),
+        nota_segundo_semestre: parseInt(formAtualizacao["update-nota2"].value),
+        turma_id: formAtualizacao["update-turma_id"].value,
+      };
 
-    const resposta = await fetch(`${url}/${idAluno}`, {
-      method: "PUT",
-      body: JSON.stringify(dadosAluno),
-      headers: { "Content-type": "application/json" },
-    });
-
-    console.log(resposta);
+      const resposta = await fetch(`${url}/${idAluno}`, {
+        method: "PUT",
+        body: JSON.stringify(dadosAluno),
+        headers: { "Content-type": "application/json" },
+      });
+      modalAtualizacao.close();
+      Swal.fire({
+        icon: "success",
+        title: "Sucesso!",
+        text: "Dados do aluno cadastrado com sucesso!",
+      });
+      document.getElementById("btn-listar").click();
+    } catch (error) {
+      modalAtualizacao.close();
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Algo deu errado, tente novamente mais tarde.",
+      });
+    }
   });
 
 // SEÇÃO EXCLUIR
 async function excluirAluno(id) {
-  const resposta = await fetch(`${url}/${id}`, {
-    method: "DELETE",
-  });
+  try {
+    Swal.fire({
+      title: "Você tem certeza?",
+      text: "Você não poderá reverter essa ação!",
+      icon: "warning",
+      showCancelButton: true,
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim, desejo excluir!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const resposta = await fetch(`${url}/${id}`, {
+          method: "DELETE",
+        });
+        Swal.fire({
+          title: "Excluído!",
+          text: "Os dados do aluno foram excluidos com sucesso!",
+          icon: "success",
+        });
+        document.getElementById("btn-listar").click();
+      }
+    });
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Algo deu errado, tente novamente mais tarde.",
+    });
+  }
 }

@@ -29,6 +29,7 @@ formCadastro.addEventListener("submit", async (e) => {
     body: JSON.stringify(dadosProfessor),
     headers: { "Content-type": "application/json" },
   });
+  console.log("testando");
 });
 
 // SEÇÃO LER
