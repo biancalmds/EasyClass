@@ -174,7 +174,7 @@ document
       Swal.fire({
         icon: "success",
         title: "Sucesso!",
-        text: "Dados da turma cadastrados com sucesso!",
+        text: "Dados da turma atualizados com sucesso!",
       });
       document.getElementById("btn-listar").click();
     } catch (error) {
@@ -205,10 +205,6 @@ async function excluirTurma(id) {
       const resposta = await fetch(`${url}/${id}`, {
         method: "DELETE",
       });
-
-      if (!resposta.ok) {
-        throw new Error("Falha ao excluir a turma");
-      }
       Swal.fire({
         title: "Excluído!",
         text: "Os dados da turma foram excluídos com sucesso!",

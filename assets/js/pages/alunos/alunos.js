@@ -175,7 +175,7 @@ document
       Swal.fire({
         icon: "success",
         title: "Sucesso!",
-        text: "Dados do aluno cadastrados com sucesso!",
+        text: "Dados do aluno atualizados com sucesso!",
       });
       document.getElementById("btn-listar").click();
     } catch (error) {
@@ -190,34 +190,25 @@ document
 
 // SEÇÃO EXCLUIR
 async function excluirAluno(id) {
-  try {
-    Swal.fire({
-      title: "Você tem certeza?",
-      text: "Você não poderá reverter essa ação!",
-      icon: "warning",
-      showCancelButton: true,
-      cancelButtonText: "Cancelar",
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Sim, desejo excluir!",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        const resposta = await fetch(`${url}/${id}`, {
-          method: "DELETE",
-        });
-        Swal.fire({
-          title: "Excluído!",
-          text: "Os dados do aluno foram excluidos com sucesso!",
-          icon: "success",
-        });
-        document.getElementById("btn-listar").click();
-      }
-    });
-  } catch (error) {
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "Algo deu errado, tente novamente mais tarde.",
-    });
+  const resultado = await Swal.fire({
+    title: "Você tem certeza?",
+    text: "Você não poderá reverter essa ação!",
+    icon: "warning",
+    showCancelButton: true,
+    cancelButtonText: "Cancelar",
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sim, desejo excluir!",
+  });
+
+  if (resultado.isConfirmed) {
+    try {
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Algo deu errado, tente novamente mais tarde.",
+      });
+    }
   }
 }

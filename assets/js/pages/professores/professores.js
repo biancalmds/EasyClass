@@ -160,7 +160,7 @@ document
       Swal.fire({
         icon: "success",
         title: "Sucesso!",
-        text: "Dados do professor cadastrados com sucesso!",
+        text: "Dados do professor atualizados com sucesso!",
       });
       document.getElementById("btn-listar").click();
     } catch (error) {
@@ -191,11 +191,6 @@ async function excluirProfessor(id) {
       const resposta = await fetch(`${url}/${id}`, {
         method: "DELETE",
       });
-
-      if (!resposta.ok) {
-        throw new Error("Falha ao excluir professor");
-      }
-
       Swal.fire({
         title: "Excluído!",
         text: "Os dados do professor foram excluídos com sucesso!",
