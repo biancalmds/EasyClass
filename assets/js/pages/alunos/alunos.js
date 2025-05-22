@@ -88,7 +88,6 @@ const formCadastro = document.getElementById("form-cadastra-aluno");
 formCadastro.addEventListener("submit", async (e) => {
   try {
     e.preventDefault();
-
     const dadosAluno = {
       nome: formCadastro.nome.value,
       data_nascimento: formCadastro.dt_nascimento.value,
@@ -156,9 +155,8 @@ document
   .getElementById("form-atualiza-aluno")
   .addEventListener("submit", async (e) => {
     const idAluno = document.getElementById("id-aluno").value;
-    e.preventDefault();
-
     try {
+      e.preventDefault();
       const formAtualizacao = e.target;
       const dadosAluno = {
         nome: formAtualizacao["update-nome"].value,
@@ -177,7 +175,7 @@ document
       Swal.fire({
         icon: "success",
         title: "Sucesso!",
-        text: "Dados do aluno cadastrado com sucesso!",
+        text: "Dados do aluno cadastrados com sucesso!",
       });
       document.getElementById("btn-listar").click();
     } catch (error) {
