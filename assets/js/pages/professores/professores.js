@@ -37,12 +37,12 @@ document.getElementById("btn-listar").addEventListener("click", async () => {
       dados.map((professor) => {
         const trProfessor = document.createElement("tr");
         trProfessor.innerHTML = `
-                <td>${professor.id}</td>
-                <td>${professor.nome}</td>
-                <td>${professor.idade}</td>
-                <td>${professor.materia}</td>
-                <td>${professor.observacoes}</td>
-                <td>${professor.turmas.map((turma) => turma.materia)}</td>
+                <td data-label="Id">${professor.id}</td>
+                <td data-label="Nome">${professor.nome}</td>
+                <td data-label="Idade">${professor.idade}</td>
+                <td data-label="Matéria">${professor.materia}</td>
+                <td data-label="Observações">${professor.observacoes}</td>
+                <td data-label="Turmas">${professor.turmas.map((turma) => turma.materia)}</td>
                 <td><button type="button" onclick = "editarProfessor(${
                   professor.id
                 })">Editar</button></td>

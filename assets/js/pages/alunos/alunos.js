@@ -55,14 +55,14 @@ document.getElementById("btn-listar").addEventListener("click", async () => {
       dados.map((aluno) => {
         const trAluno = document.createElement("tr");
         trAluno.innerHTML = `
-                <td>${aluno.id}</td>
-                <td>${aluno.nome}</td>
-                <td>${aluno.idade}</td>
-                <td>${aluno.data_nascimento}</td>
-                <td>${aluno.turma_id}</td>
-                <td>${aluno.nota_primeiro_semestre}</td>
-                <td>${aluno.nota_segundo_semestre}</td>
-                <td>${aluno.media_final}</td>
+                <td data-label="Id">${aluno.id}</td>
+                <td data-label="Nome">${aluno.nome}</td>
+                <td data-label="Idade">${aluno.idade}</td>
+                <td data-label="Data de Nascimento">${aluno.data_nascimento}</td>
+                <td data-label="Id da Turma">${aluno.turma_id}</td>
+                <td data-label="Nota do 1° Semestre">${aluno.nota_primeiro_semestre}</td>
+                <td data-label="Nota do 2° Semestre">${aluno.nota_segundo_semestre}</td>
+                <td data-label="Média Final">${aluno.media_final}</td>
                 <td><button type="button" onclick = "editarAluno(${aluno.id})">Editar</button></td>
                 <td><button type="button" href="#" onclick = "excluirAluno(${aluno.id})">Excluir</button></td>`;
         tbody.appendChild(trAluno);

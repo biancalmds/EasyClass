@@ -52,11 +52,11 @@ document.getElementById("btn-listar").addEventListener("click", async () => {
       dados.map((turma) => {
         const trTurma = document.createElement("tr");
         trTurma.innerHTML = `
-                <td>${turma.id}</td>
-                <td>${turma.materia}</td>
-                <td>${turma.descricao}</td>
-                <td>${turma.professor_id}</td>
-                <td>${turma.ativo == true ? "Ativa" : "Inativa"}</td>
+                <td data-label="Id">${turma.id}</td>
+                <td data-label="Matéria">${turma.materia}</td>
+                <td data-label="Descrição">${turma.descricao}</td>
+                <td data-label="Id do Professor">${turma.professor_id}</td>
+                <td data-label="Status">${turma.ativo == true ? "Ativa" : "Inativa"}</td>
                 <td><button type="button" onclick="editarTurma(${
                   turma.id
                 })">Editar</button></td>
