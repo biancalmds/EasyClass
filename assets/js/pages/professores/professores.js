@@ -7,6 +7,7 @@ document.getElementById("btn-cadastrar").addEventListener("click", () => {
 });
 document.getElementById("fechar-cadastro").addEventListener("click", () => {
   modalCadastro.close();
+  formCadastro.reset();
 });
 
 // SEÇÃO LER

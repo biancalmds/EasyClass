@@ -42,7 +42,7 @@
                 <label for="nome">Nome:</label><br>
                 <input type="text" name="nome" id="nome" required><br>
                 <label for="dt_nascimento">Idade:</label><br>
-                <input type="date" name="dt_nascimento" id="dt_nascimento" oninput="verificaIdade()" required><br>
+                <input type="date" name="dt_nascimento" id="dt_nascimento" oninput="verificaIdade('dt_nascimento')" required><br>
                 <label for="turma_id">Id da Turma:</label>
                 <select class="turma-select" name="turma_id" id="turma_id" required>
                     <option value="" selected disabled>Escolha uma turma</option>
@@ -63,7 +63,7 @@
                 <label for="update-nome">Nome:</label><br>
                 <input type="text" name="update-nome" id="update-nome"><br>
                 <label for="update-dt_nascimento">Idade:</label><br>
-                <input type="date" name="update-dt_nascimento" id="update-dt_nascimento"><br>
+                <input type="date" name="update-dt_nascimento" id="update-dt_nascimento" oninput="verificaIdade('update-dt_nascimento')"><br>
                 <label for="update-turma_id">Id da Turma:</label><br>
                 <select class="turma-select" name="update-turma_id" id="update-turma_id"></select><br>
                 <label for="update-nota1">Nota do 1° semestre:</label><br>
